@@ -3,19 +3,48 @@ import './StandingsTable.css';
 
 const API_BASE = 'http://localhost:5000';
 
-const getSidebarColor = (rank) => {
-  // Top 4 teams: Champions League spots
-  if (rank >= 1 && rank <= 4) return { borderLeft: '4px solid #10b981' };
-  
-  // 5th team: Secondary qualification spot
-  if (rank === 5) return { borderLeft: '4px solid #3b82f6' }; // blue for Europa League
-  
-  // 6th team: Tertiary qualification spot
-  if (rank === 6) return { borderLeft: '4px solid #f59e0b' }; // yellow for Conference League
+const LEAGUE_COLORS = {
+  '39': { // EPL
+    champions: { range: [1, 4], color: '#10b981' },
+    europa: { range: [5, 5], color: '#3b82f6' },
+    // conference: { range: [6, 6], color: '#f59e0b' },
+    relegation: { range: [18, 20], color: '#ef4444' },
+  },
+  '140': { // La Liga
+    champions: { range: [1, 4], color: '#10b981' },
+    europa: { range: [5, 5], color: '#3b82f6' },
+    conference: { range: [6, 6], color: '#f59e0b' },
+    relegation: { range: [18, 20], color: '#ef4444' },
+  },
+  '135': { // Serie A
+    champions: { range: [1, 4], color: '#10b981' },
+    europa: { range: [5, 5], color: '#3b82f6' },
+    conference: { range: [6, 6], color: '#f59e0b' },
+    relegation: { range: [18, 20], color: '#ef4444' },
+  },
+  // '61': { // Ligue 1
+  //   champions: { range: [1, 3], color: '#10b981' },
+  //   europa: { range: [4, 5], color: '#3b82f6' },
+  //   conference: { range: [6, 6], color: '#f59e0b' },
+  //   relegation: { range: [18, 20], color: '#ef4444' },
+  // },
+  // '21': { // Bundesliga
+  //   champions: { range: [1, 3], color: '#10b981' },
+  //   europa: { range: [4, 5], color: '#3b82f6' },
+  //   conference: { range: [6, 6], color: '#f59e0b' },
+  //   relegation: { range: [18, 20], color: '#ef4444' },
+  // }
+};
 
-  // Relegation zone
-  if (rank >= 18) return { borderLeft: '4px solid #ef4444' };
+const getSidebarColor = (rank, leagueId) => {
+  const rules = LEAGUE_COLORS[leagueId];
+  if (!rules) return { borderLeft: '4px solid transparent' };
   
+  for (const rule of Object.values(rules)) {
+    if (rank >= rule.range[0] && rank <= rule.range[1]) {
+      return { borderLeft: `4px solid ${rule.color}` };
+    }
+  }
   return { borderLeft: '4px solid transparent' };
 };
 
@@ -66,7 +95,7 @@ const StandingsTable = ({ leagueId }) => {
         <tbody>
           {rows.map((row) => (
             <tr key={row.team.id} className={`standingsRow `}>
-              <td className="standingsTd standingsTdRank" style={{ ...getSidebarColor(row.rank), paddingLeft: '0.75rem', fontWeight: 'bold' }}>{row.rank}</td>
+              <td className="standingsTd standingsTdRank" style={{ ...getSidebarColor(row.rank, leagueId), paddingLeft: '0.75rem', fontWeight: 'bold' }}>{row.rank}</td>
               <td className="standingsTd standingsTdTeam">
                 <img src={row.team.logo} className="standingsTeamLogo" alt="" />
                 {row.team.name}
@@ -77,7 +106,7 @@ const StandingsTable = ({ leagueId }) => {
               <td className="standingsTd">{row.all?.lose || '-'}</td>
               <td className="standingsTd">{row.all?.goals?.for || '-'}</td>
               <td className="standingsTd">{row.all?.goals?.against || '-'}</td>
-              <td className="standingsTd">{row.goalsDiff || '-'}</td>
+              <td className="standingsTd">{row.goalsDiff || '0'}</td>
               <td className="standingsTd standingsTdPts">{row.points}</td>
             </tr>
           ))}
