@@ -22,18 +22,21 @@ const LEAGUE_COLORS = {
     conference: { range: [6, 6], color: '#f59e0b' },
     relegation: { range: [18, 20], color: '#ef4444' },
   },
-  // '61': { // Ligue 1
-  //   champions: { range: [1, 3], color: '#10b981' },
-  //   europa: { range: [4, 5], color: '#3b82f6' },
-  //   conference: { range: [6, 6], color: '#f59e0b' },
-  //   relegation: { range: [18, 20], color: '#ef4444' },
-  // },
-  // '21': { // Bundesliga
-  //   champions: { range: [1, 3], color: '#10b981' },
-  //   europa: { range: [4, 5], color: '#3b82f6' },
-  //   conference: { range: [6, 6], color: '#f59e0b' },
-  //   relegation: { range: [18, 20], color: '#ef4444' },
-  // }
+  '61': { // Ligue 1
+    champions: { range: [1, 3], color: '#10b981' },
+      champions_qual: { range: [4, 4], color: '#3b82f6' },
+    europa: { range: [5, 5], color: '#f59e0b' },
+    conference: { range: [6, 6], color: '#24befb' },
+    relegation_playoff: { range: [16, 16], color: '#f59e0b' },
+    relegation: { range: [17, 18], color: '#ef4444' },
+  },
+  '21': { // Bundesliga
+    champions: { range: [1, 4], color: '#10b981' },
+    europa: { range: [5, 5], color: '#3b82f6' },
+    conference: { range: [6, 6], color: '#c60bf5' },
+    relegation_playoff: { range: [16, 16], color: '#f59e0b' },
+    relegation: { range: [17, 18], color: '#ef4444' },
+  }
 };
 
 const getSidebarColor = (rank, leagueId) => {
