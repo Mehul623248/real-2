@@ -1,0 +1,57 @@
+/* League Standings page */
+.leagueStandingsPage {
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+}
+
+.leagueScroller {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid #1f2937;
+}
+
+.leagueScroller.noScrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.leagueScroller.noScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.leagueTab {
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.leagueTabActive {
+  color: #fff;
+  border-bottom-color: #3b82f6;
+}
+
+.leagueTabInactive {
+  color: #6b7280;
+}
+
+.leagueTabInactive:hover {
+  color: #d1d5db;
+}
+
+.leagueContent {
+  padding: 0.5rem;
+}
+
+.leagueTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 1rem;
+}
