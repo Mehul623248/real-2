@@ -1,0 +1,188 @@
+/* --- Variables --- */
+:root {
+  --bg-black: #000000;
+  --bg-card: #121212;
+  --text-white: #ffffff;
+  --text-gray: #9ca3af;
+  --accent-blue: #3b82f6;
+  --border-dark: #27272a;
+}
+
+body {
+  background-color: var(--bg-black);
+  color: var(--text-white);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+}
+
+/* --- Layout Containers --- */
+.home-page { padding-bottom: 80px; }
+
+.header-container {
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 100;
+  border-bottom: 1px solid var(--border-dark);
+  overflow-x: auto;
+}
+
+/* --- Navigation --- */
+.main-tabs {
+  display: flex;
+  gap: 20px;
+  padding: 15px 16px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: 900;
+  color: #555;
+  cursor: pointer;
+  padding: 0;
+}
+
+.tab-btn.active { color: var(--accent-blue); }
+
+.sub-nav {
+  display: flex;
+  gap: 20px;
+  padding: 0 16px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-gray);
+}
+
+.sub-nav-item.active { color: var(--text-white); }
+
+/* --- Date Strip (Fixes Vertical Stacking) --- */
+.date-strip {
+  display: flex; /* This forces dates into a row */
+  overflow-x: auto;
+  padding: 10px 0;
+  background: #050505;
+}
+
+.date-item {
+  min-width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.date-top { font-size: 11px; font-weight: 700; color: #666; }
+.date-bottom { font-size: 15px; font-weight: 700; color: #666; }
+
+.date-item.active .date-top { color: var(--accent-blue); }
+.date-item.active .date-bottom { color: var(--accent-blue); }
+
+/* --- Game Cards (Fixes Huge Images) --- */
+.games-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 column on mobile */
+  gap: 10px;
+  padding: 12px;
+}
+
+/* Tablet/Desktop Support */
+@media (min-width: 768px) {
+  .games-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.game-card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between; /* Pushes time to the right */
+  border: 1px solid var(--border-dark);
+}
+
+.teams-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Space between the two teams */
+}
+
+.team-row {
+  display: flex;
+  align-items: center; /* Vertically centers logo and text */
+}
+
+/* !!! CRITICAL FIX: LIMIT IMAGE SIZE !!! */
+.team-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  margin-right: 12px;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-meta {
+  font-size: 11px;
+  color: var(--text-white);
+  font-weight: 500;
+  display: flex;
+  gap: 4px;
+}
+
+.team-name {
+  font-size: 15px;
+  font-weight: 700;
+  /* color: var(--accent-blue); Or white */
+}
+
+/* Remove default heading margins for team-score and tighten spacing */
+.team-score {
+  margin: 0; /* remove h1 default margins */
+  font-size: 28px;
+  line-height: 1; /* tighter spacing between meta and name */
+  color: var(--text-white);
+  font-weight: 700;
+}
+
+/* Right Side Details */
+.game-details {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.game-time {
+  font-size: 15px;
+  font-weight: 700;
+  display: block;
+}
+
+.comment-count {
+  font-size: 12px;
+  color: var(--text-gray);
+  margin-top: 4px;
+}
+
+.aggregate-score {
+  font-size: 12px;
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+/* --- Standings Link --- */
+.standings-link {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
