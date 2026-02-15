@@ -1,3 +1,22 @@
+
+<img width="1826" height="897" alt="la_liga_standings_working" src="https://github.com/user-attachments/assets/572def09-3e3a-4731-830b-b01e71b53b65" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
