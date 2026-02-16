@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState('FC');
+  const[subActiveTab, setSubActiveTab] = useState('All');
   const [games, setGames] = useState([]);
   const [selectedDateIndex, setSelectedDateIndex] = useState(1); // Index 1 = Friday (today)
 
@@ -53,16 +54,16 @@ const HomePage = () => {
       time: "2:00 PM",
       comments: 82,
       agg: "Agg 0-0",
-      home: { score: '0', name: "Real Madrid", logo: "https://media.api-sports.io/football/teams/541.png", rank: "9th", pts: "15pt" },
-      away: { score: '0', name: "Benfica", logo: "https://media.api-sports.io/football/teams/211.png", rank: "24th", pts: "9pt" }
+      home: { score: '0', name: "Real eest", logo: "https://media.api-sports.io/football/teams/1.png", rank: "9th", pts: "15pt" },
+      away: { score: '0', name: "test", logo: "https://media.api-sports.io/football/teams/2.png", rank: "24th", pts: "9pt" }
     },
     {
       id: 2,
       time: "11:45 AM",
       comments: 18,
       agg: "Agg 0-0",
-      home: { score: '0', name: "Juventus", logo: "https://media.api-sports.io/football/teams/496.png", rank: "13th", pts: "13pt" },
-      away: { score: '0', name: "BALLLLL", logo: "https://media.api-sports.io/football/teams/645.png", rank: "20th", pts: "10pt" }
+      home: { score: '0', name: "t", logo: "https://media.api-sports.io/football/teams/1.png", rank: "13th", pts: "13pt" },
+      away: { score: '0', name: "BALLLLL", logo: "https://media.api-sports.io/football/teams/2.png", rank: "20th", pts: "10pt" }
     }
   ];
 
@@ -81,10 +82,13 @@ const HomePage = () => {
 
         {/* Sub Navigation */}
         <div className="sub-nav">
-          <span className="sub-nav-item active">All</span>
-          <span className="sub-nav-item">EPL</span>
-          <span className="sub-nav-item">UCL</span>
-          <span className="sub-nav-item">La Liga</span>
+          <button className={`tab-btn ${subActiveTab === 'All' ? 'active' : ''}`} onClick={() => setSubActiveTab('All')}>All</button>
+          <button className={`tab-btn ${subActiveTab === 'Premier League' ? 'active' : ''}`} onClick={() => setSubActiveTab('Premier League')}>PL</button>
+          <button className={`tab-btn ${subActiveTab === 'UCL' ? 'active' : ''}`} onClick={() => setSubActiveTab('UCL')}>UCL</button>
+          <button className={`tab-btn ${subActiveTab === 'La Liga' ? 'active' : ''}`} onClick={() => setSubActiveTab('La Liga')}>La Liga</button>
+          <button className={`tab-btn ${subActiveTab === 'Serie A' ? 'active' : ''}`} onClick={() => setSubActiveTab('Serie A')}>Serie A</button>
+          <button className={`tab-btn ${subActiveTab === 'Ligue 1' ? 'active' : ''}`} onClick={() => setSubActiveTab('Ligue 1')}>Ligue 1</button>
+          <button className={`tab-btn ${subActiveTab === 'Bundesliga' ? 'active' : ''}`} onClick={() => setSubActiveTab('Bundesliga')}>Bundesliga</button> 
         </div>
 
         {/* Date Strip */}
@@ -129,31 +133,32 @@ const HomePage = () => {
         </div>
 
         <div className="games-grid">
-          {displayGames.length === 0 ? (
+          {games.length === 0 ? (
              <div style={{textAlign: 'center', padding: '20px', color: '#666'}}>No games scheduled</div>
           ) : (
              displayGames
               // 1. THIS FILTER IS MANDATORY
               .filter(game => {
-                if (activeTab === 'All') return true; // Assuming you meant activeFilter here?
-                // You have activeTab ('FC') and Filters ('All', 'EPL'...)
-                // You probably want to use a specific filter state or check the sub-nav.
-                // If you don't have a separate filter state, hardcode 'EPL' etc for now or fix the sub-nav state.
-                return true; 
+                 if (subActiveTab === 'All') return true;
+                return game.league === subActiveTab;
               })
               .map((game) => (
                 // 2. USE COMPOSITE KEY TO FIX "STUCK" RENDERING BUGS
                 // Now that game.league exists, this key will be unique!
                 <div key={`${game.league}-${game.id}`} className="game-card">
                   <div className="teams-column">
-                    <TeamRow team={game.home} />
-                    <TeamRow team={game.away} />
+                    <TeamRow team={game.home} isWinner={game.status === 'finished' && game.home.score > game.away.score} isDraw={game.status === 'finished' && game.home.score === game.away.score} />
+                    <TeamRow team={game.away} isWinner={game.status === 'finished' && game.away.score > game.home.score} isDraw={game.status === 'finished' && game.home.score === game.away.score} />
                   </div>
 
                   <div className="game-details">
                     <div className="time-box">
-                      <span className="game-time">{game.home.score === "" ? game.time : ((game.elapsed_time === null) ? 'Final' : `${game.elapsed_time}'`)}</span>
-                      <div className="comment-count">💬 {game.comments}</div>
+                      <span
+                        className={`game-time ${game.status === 'live' && game.elapsed_time && game.elapsed_time !== 'FT' ? 'live' : ''}`}
+                      >
+                        {game.home.score === "" ? game.time : ((game.elapsed_time === null || game.elapsed_time === 'FT') ? 'Final' : `${game.elapsed_time}`)}
+                      </span>
+                      {/* <div className="comment-count">💬 {game.comments}</div> */}
                     </div>
                     {game.agg && <div className="aggregate-score">{game.agg}</div>}
                   </div>
@@ -166,17 +171,17 @@ const HomePage = () => {
   );
 };
 
-const TeamRow = ({ team }) => {
+const TeamRow = ({ team, isWinner, isDraw }) => {
   const score = team.score;
   const showRankPts = score == null || score === 'NA'; // null/undefined or literal 'NA'
 
   return (
-    <div className="team-row">
+    <div className={`team-row ${isWinner ? 'winner' : ''} ${isDraw ? 'draw' : ''}`}>
       <img src={team.logo} alt={team.name} className="team-logo" />
       <div className="team-info">
         <div className="team-meta">
           {!showRankPts ? (
-            <h1 className="team-score">{score}</h1>
+            <h1 className={`team-score ${isWinner ? 'winner' : ''} ${isDraw ? 'draw' : ''}`}>{score}</h1>
           ) : (
             <>
               <span className="dot">•</span>
