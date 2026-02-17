@@ -8,6 +8,7 @@ import {
 
 import HomePage from "./HomePage/HomePage";
 import LeagueStandings from "./LeagueStandings/LeagueStandings";
+import TeamPage from './TeamPage/TeamPage';
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
         
           <Route path="/" element={<HomePage/>} />
           <Route path="/standings" element={<LeagueStandings/>} />
+          <Route path="/team/:id" element={<TeamPage />} />
       </Routes>
     </Router>
   );

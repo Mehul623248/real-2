@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './StandingsTable.css';
 
 const API_BASE = 'http://localhost:5000';
@@ -101,7 +102,7 @@ const StandingsTable = ({ leagueId }) => {
               <td className="standingsTd standingsTdRank" style={{ ...getSidebarColor(row.rank, leagueId), paddingLeft: '0.75rem', fontWeight: 'bold' }}>{row.rank}</td>
               <td className="standingsTd standingsTdTeam">
                 <img src={row.team.logo} className="standingsTeamLogo" alt="" />
-                {row.team.name}
+                <Link to={`/team/${row.team.id}`} state={{ team: row.team }} style={{ color: 'white', textDecoration: 'none' }}>{row.team.name}</Link>
               </td>
               <td className="standingsTd">{row.all?.played || '-'}</td>
               <td className="standingsTd">{row.all?.win || '-'}</td>
