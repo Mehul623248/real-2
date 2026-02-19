@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import GameCard from '../HomePage/GameCard';
+import TeamGameCard from '../TeamPage/TeamGameCard';
 import './TeamPage.css';
 
 const TeamPage = () => {
@@ -39,15 +39,13 @@ const TeamPage = () => {
       home: {
         name: match.home_team?.name || 'Unknown',
         score: match.home_score || 'TBD',
-        rank: '-',
-        pts: '0pt',
+      
         logo: match.home_team?.logo
       },
       away: {
         name: match.away_team?.name || 'Unknown',
         score: match.away_score || 'TBD',
-        rank: '-',
-        pts: '0pt',
+        
         logo: match.away_team?.logo
       },
       time: match.time || match.date_display || '-',
@@ -63,6 +61,7 @@ const TeamPage = () => {
         <img src={teamData.team.logo} alt={`${teamData.team.name} Logo`} className="team-logo" />
         <p className="team-info-text">Rank: {teamData.rank}</p>
         <p className="team-info-text">Points: {teamData.points}</p>
+       
       </div>
 
       {error && (
@@ -78,7 +77,7 @@ const TeamPage = () => {
         ) : matchesData?.next_matches && matchesData.next_matches.length > 0 ? (
           matchesData.next_matches.map((match, idx) => (
             <div key={match.match_id || idx}>
-              <GameCard {...formatMatchForGameCard(match)} />
+              <TeamGameCard {...formatMatchForGameCard(match)} />
             </div>
           ))
         ) : (
@@ -93,7 +92,7 @@ const TeamPage = () => {
         ) : matchesData?.past_matches && matchesData.past_matches.length > 0 ? (
           matchesData.past_matches.map((match, idx) => (
             <div key={match.match_id || idx}>
-              <GameCard {...formatMatchForGameCard(match)} />
+              <TeamGameCard {...formatMatchForGameCard(match)} />
             </div>
           ))
         ) : (
