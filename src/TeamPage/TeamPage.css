@@ -26,3 +26,76 @@ body {
   /* optional: add hover styling if you want */
   text-decoration: underline;
 }
+
+/* TeamPage Specific Styles */
+.team-page-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-header {
+  margin-bottom: 32px;
+}
+
+.team-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.team-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.team-info-text {
+  color: var(--text-gray);
+  margin: 8px 0;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.matches-grid {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.loading-text,
+.no-matches-text {
+  color: var(--text-gray);
+}
+
+.error-message {
+  background-color: #7f1d1d;
+  color: #fecaca;
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.go-back-btn {
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.go-back-btn:hover {
+  background-color: #1d4ed8;
+}

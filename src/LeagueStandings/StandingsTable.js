@@ -102,7 +102,7 @@ const StandingsTable = ({ leagueId }) => {
               <td className="standingsTd standingsTdRank" style={{ ...getSidebarColor(row.rank, leagueId), paddingLeft: '0.75rem', fontWeight: 'bold' }}>{row.rank}</td>
               <td className="standingsTd standingsTdTeam">
                 <img src={row.team.logo} className="standingsTeamLogo" alt="" />
-                <Link to={`/team/${row.team.id}`} state={{ team: row.team }} style={{ color: 'white', textDecoration: 'none' }}>{row.team.name}</Link>
+                <Link to={`/team/${row.team.id}`} state={{ team: row }} style={{ color: 'white', textDecoration: 'none' }}>{row.team.name}</Link>
               </td>
               <td className="standingsTd">{row.all?.played || '-'}</td>
               <td className="standingsTd">{row.all?.win || '-'}</td>

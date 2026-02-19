@@ -1,0 +1,119 @@
+/* GameCard Styles */
+.game-card {
+  background-color: #121212;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.game-card:hover {
+  background-color: #1a1a1a;
+}
+
+.game-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.game-card-teams {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.team-row {
+  display: flex;
+  align-items: center;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+
+.team-stats {
+  display: flex;
+  align-items: center;
+  color: #9ca3af;
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.team-score {
+  color: white;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.team-rank {
+  color: #e5e7eb;
+}
+
+.team-separator {
+  margin: 0 12px;
+  opacity: 0.5;
+}
+
+.team-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #2563eb;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.game-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100%;
+  padding-left: 16px;
+  min-width: 80px;
+}
+
+.game-time-info {
+  text-align: right;
+}
+
+.game-time {
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.025em;
+}
+
+.game-comments {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 4px;
+  color: #6b7280;
+}
+
+.game-comments-icon {
+  font-size: 10px;
+}
+
+.game-comments-count {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.game-agg {
+  margin-top: 16px;
+  color: #60a5fa;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
