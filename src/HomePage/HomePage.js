@@ -191,7 +191,7 @@ const TeamRow = ({ team, isWinner, isDraw }) => {
             </>
           )}
         </div>
-        <div className="team-name">{team.name}</div>
+        <div className={`team-name ${isWinner ? 'winner' : ''} ${isDraw ? 'draw' : ''}`}>{team.name}</div>
       </div>
     </div>
   );

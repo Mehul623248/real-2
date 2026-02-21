@@ -144,6 +144,14 @@ body {
   /* color: var(--accent-blue); Or white */
 }
 
+.team-name.winner {
+  color: #3b82f6; /* Blue for winner */
+}
+
+.team-name.draw {
+  color: #fbbf24; /* Yellow for draw */
+}
+
 /* Remove default heading margins for team-score and tighten spacing */
 .team-score {
   margin: 0; /* remove h1 default margins */

@@ -1,7 +1,7 @@
 import React from 'react';
 import './TeamGameCard.css';
 
-const TeamGameCard = ({ home, away, time, comments, agg }) => {
+const TeamGameCard = ({ home, away, time, comments, agg, result }) => {
   return (
     <div className="game-card">
       <div className="game-card-content">
@@ -19,6 +19,11 @@ const TeamGameCard = ({ home, away, time, comments, agg }) => {
 
         {/* --- RIGHT SIDE: Time & Info --- */}
         <div className="game-card-info">
+          {result && (
+            <div className={`match-result ${result}`}>
+              {result.charAt(0).toUpperCase() + result.slice(1)}
+            </div>
+          )}
           <div className="game-time-info">
             <div className="game-time">{time}</div>
            
