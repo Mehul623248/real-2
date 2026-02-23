@@ -33,6 +33,54 @@ const TeamPage = () => {
     return <div>Loading team data...</div>;
   }
 
+  // Helper function to format date to mm/dd/yyyy
+  const formatDateToMMDDYYYY = (dateStr, datetimeAttr) => {
+    if (!dateStr) return '-';
+    
+    try {
+      // Try to parse from datetime attribute first (ISO format)
+      if (datetimeAttr) {
+        const date = new Date(datetimeAttr);
+        const mm = String(date.getUTCMonth() + 1).padStart(2, '0');
+        const dd = String(date.getUTCDate()).padStart(2, '0');
+        const yyyy = date.getUTCFullYear();
+        return `${mm}/${dd}/${yyyy}`;
+      }
+      
+      // Fallback: try to parse date_display string
+      // Handle formats like "17 Jan", "17/01/2026", "January 17", etc.
+      const months = {
+        'jan': '01', 'january': '01',
+        'feb': '02', 'february': '02',
+        'mar': '03', 'march': '03',
+        'apr': '04', 'april': '04',
+        'may': '05',
+        'jun': '06', 'june': '06',
+        'jul': '07', 'july': '07',
+        'aug': '08', 'august': '08',
+        'sep': '09', 'september': '09',
+        'oct': '10', 'october': '10',
+        'nov': '11', 'november': '11',
+        'dec': '12', 'december': '12'
+      };
+      
+      // Try parsing "17 Jan" format
+      const match = dateStr.match(/(\d{1,2})\s+([a-zA-Z]+)/);
+      if (match) {
+        const day = String(match[1]).padStart(2, '0');
+        const month = months[match[2].toLowerCase()];
+        if (month) {
+          const year = new Date().getFullYear();
+          return `${month}/${day}/${year}`;
+        }
+      }
+      
+      return dateStr;
+    } catch (e) {
+      return dateStr;
+    }
+  };
+
   // Format match data for GameCard
   const formatMatchForGameCard = (match, currentTeam) => {
     const homeScore = match.home_score || 'TBD';
@@ -40,17 +88,31 @@ const TeamPage = () => {
     const currentTeamName = currentTeam?.team?.name;
     
     // Determine result from current team's perspective
-    let result = null;
-    if (homeScore !== 'TBD' && awayScore !== 'TBD') {
-      if (currentTeamName === match.home_team?.name) {
-        if (homeScore > awayScore) result = 'win';
-        else if (homeScore < awayScore) result = 'loss';
-        else result = 'draw';
-      } else if (currentTeamName === match.away_team?.name) {
-        if (awayScore > homeScore) result = 'win';
-        else if (awayScore < homeScore) result = 'loss';
-        else result = 'draw';
-      }
+    // let result = null;
+    // if (homeScore !== 'TBD' && awayScore !== 'TBD') {
+    //   if (currentTeamName === match.home_team?.name) {
+    //     if (homeScore > awayScore) result = 'win';
+    //     else if (homeScore < awayScore) result = 'loss';
+    //     else result = 'draw';
+    //   } else if (currentTeamName === match.away_team?.name) {
+    //     if (awayScore > homeScore) result = 'win';
+    //     else if (awayScore < homeScore) result = 'loss';
+    //     else result = 'draw';
+    //   }
+    // }
+    
+    // Format date/time for display
+    // Past matches have 'date_display' (readable format without timezone)
+    // Next matches have separate 'date' and 'time' fields
+    let dateTime = '-';
+    if (match.date_display) {
+      dateTime = formatDateToMMDDYYYY(match.date_display, match.date);
+    } else if (match.date && match.time) {
+      dateTime = `${match.date} ${match.time}`;
+    } else if (match.date) {
+      dateTime = match.date;
+    } else if (match.time) {
+      dateTime = match.time;
     }
     
     return {
@@ -64,10 +126,10 @@ const TeamPage = () => {
         score: awayScore,
         logo: match.away_team?.logo
       },
-      time: match.time || match.date_display || '-',
+      time: dateTime,
       comments: 0,
       agg: match.competition?.name || match.outcome || '',
-      result: result
+      // result: result
     };
   };
 
