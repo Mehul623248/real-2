@@ -1,4 +1,10 @@
 
+<img width="984" height="885" alt="image" src="https://github.com/user-attachments/assets/6357be09-c880-46da-9e40-3789b275c1c8" />
+
+
+<img width="1901" height="834" alt="image" src="https://github.com/user-attachments/assets/48c9253c-2d26-441a-b570-82ebe407712b" />
+
+
 <img width="1826" height="897" alt="la_liga_standings_working" src="https://github.com/user-attachments/assets/572def09-3e3a-4731-830b-b01e71b53b65" />
 
 
