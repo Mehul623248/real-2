@@ -60,6 +60,15 @@ body {
 
 .section-header{
   padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 /* --- Date Strip (Fixes Vertical Stacking) --- */
 .date-strip {
@@ -195,6 +204,13 @@ body {
 
 /* --- Standings Link --- */
 .standings-link {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bracket-link {
   color: var(--accent-blue);
   text-decoration: none;
   font-weight: 700;

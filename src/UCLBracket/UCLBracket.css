@@ -1,0 +1,186 @@
+.ucl-bracket-container {
+  padding: 30px 20px;
+  background: #0a0e27;
+  color: white;
+  min-height: 100vh;
+}
+
+.ucl-bracket-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #3b82f6;
+}
+
+.bracket-wrapper {
+  display: flex; /* Changed from grid to flex */
+  justify-content: space-between;
+  gap: 0; /* Remove gap so stages touch for the lines */
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow-x: auto; /* Allow scrolling on small screens */
+}
+
+.bracket-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* KEY FIX: Spreads matches vertically */
+  flex: 1;
+  min-width: 250px;
+  padding: 0 15px; 
+  /* Remove the background and border here so it looks seamless */
+  background: transparent; 
+  border: none; 
+}
+
+.stage-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #60a5fa;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #1f2937;
+}
+
+.matches-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.match-box {
+  background: #1f2937;
+  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #374151;
+  transition: all 0.2s ease;
+}
+
+.match-box:hover {
+  border-color: #3b82f6;
+  background: #253549;
+}
+
+.team-matchup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.team {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: #111827;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.team-name {
+  font-weight: 600;
+  flex: 1;
+}
+
+.score {
+  font-weight: 700;
+  color: #3b82f6;
+  font-size: 1.1rem;
+  min-width: 30px;
+  text-align: right;
+}
+
+.vs {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .bracket-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .ucl-bracket-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+}
+
+/* --- Tree Bracket Layout & Connecting Lines --- */
+
+.bracket-tree-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1200px; /* Forces scrolling on small screens instead of squishing */
+  margin: 0 auto;
+  overflow-x: auto;
+  padding-bottom: 50px;
+}
+
+.match-node-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Reverse the flex direction for the right side so it converges inward */
+.match-node-wrapper.right {
+  flex-direction: row-reverse;
+}
+
+/* The container holding the two feeder matches */
+.feeders {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
+  /* THIS DRAWS THE VERTICAL CONNECTING LINE */
+  border-right: 2px solid #374151; /* Matches your border color */
+  padding-right: 20px;
+  gap: 20px;
+}
+
+/* Flip the vertical line for the right side of the bracket */
+.match-node-wrapper.right .feeders {
+  border-right: none;
+  border-left: 2px solid #374151; 
+  padding-right: 0;
+  padding-left: 20px;
+}
+
+/* The horizontal line pointing to the parent match */
+.connector-line {
+  width: 25px;
+  height: 2px;
+  background-color: #374151;
+}
+
+/* Fix spacing for the match box inside the tree */
+.match-box-container {
+  min-width: 220px;
+}
+
+/* Specific styling for the converging Final match */
+.final-match-container {
+  display: flex;
+  align-items: center;
+}
+
+.final-box {
+  min-width: 260px;
+  margin: 0 10px;
+}
+
+.final-box .match-box {
+  border: 2px solid #eab308; /* Yellow/Gold border for the final */
+}
+
+/* Ensures tree doesn't break on mobile */
+@media (max-width: 1200px) {
+  .ucl-bracket-container {
+    overflow-x: auto;
+  }
+}

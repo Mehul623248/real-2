@@ -127,9 +127,16 @@ const HomePage = () => {
       <div className="content-area">
         <div className="section-header">
           <h2 className="section-title">Games</h2>
-          <Link to="/standings">
-            <span className="standings-link">Standings ▶</span>
-          </Link>
+          <div className="header-links">
+            {subActiveTab === 'UCL' && (
+              <Link to="/bracket">
+                <span className="bracket-link">Bracket ▶</span>
+              </Link>
+            )}
+            <Link to="/standings">
+              <span className="standings-link">Standings ▶</span>
+            </Link>
+          </div>
         </div>
 
         <div className="games-grid">
