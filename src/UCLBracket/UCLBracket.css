@@ -70,12 +70,20 @@
 
 .team {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 8px;
   background: #111827;
   border-radius: 4px;
   font-size: 0.95rem;
+  gap: 8px;
+}
+
+.ucl-team-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
 }
 
 .team-name {
