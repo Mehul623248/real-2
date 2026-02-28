@@ -40,7 +40,7 @@ const bracketTree = {
         id: 11, team1: 'Rd16-5', team2: 'Rd16-6', score2: null,
         children: [
           { round: 'Round of 16', id: 5, team1: 'Newcastle United', logo1: team_logos['Newcastle United'], score1: null, team2: 'Barcelona', logo2: team_logos['Barcelona'], score2: null },
-          { round: 'Round of 16', id: 6, team1: 'Atletico Madrid', logo1: team_logos['Atletico Madrid'], score1: null, team2: 'Tottenham', logo2: team_logos['Tottenham'], score2: null }
+          { round: 'Round of 16', id: 6, team1: 'Atletico Madrid', logo1: team_logos['Atletico de Madrid'], score1: null, team2: 'Tottenham', logo2: team_logos['Tottenham Hotspur'], score2: null }
         ]
       },
       {
