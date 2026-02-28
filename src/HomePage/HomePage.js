@@ -7,6 +7,7 @@ const HomePage = () => {
   const[subActiveTab, setSubActiveTab] = useState('All');
   const [games, setGames] = useState([]);
   const [selectedDateIndex, setSelectedDateIndex] = useState(1); // Index 1 = Friday (today)
+  const [showLiveOnly, setShowLiveOnly] = useState(false); // Filter for live matches only
 
   // Fetch games when selected date changes
   useEffect(() => {
@@ -88,7 +89,8 @@ const HomePage = () => {
           <button className={`tab-btn ${subActiveTab === 'La Liga' ? 'active' : ''}`} onClick={() => setSubActiveTab('La Liga')}>La Liga</button>
           <button className={`tab-btn ${subActiveTab === 'Serie A' ? 'active' : ''}`} onClick={() => setSubActiveTab('Serie A')}>Serie A</button>
           <button className={`tab-btn ${subActiveTab === 'Ligue 1' ? 'active' : ''}`} onClick={() => setSubActiveTab('Ligue 1')}>Ligue 1</button>
-          <button className={`tab-btn ${subActiveTab === 'Bundesliga' ? 'active' : ''}`} onClick={() => setSubActiveTab('Bundesliga')}>Bundesliga</button> 
+          <button className={`tab-btn ${subActiveTab === 'Bundesliga' ? 'active' : ''}`} onClick={() => setSubActiveTab('Bundesliga')}>Bundesliga</button>
+          <button className={`tab-btn live-btn ${showLiveOnly ? 'active' : ''}`} onClick={() => setShowLiveOnly(!showLiveOnly)}>🔴 Live</button>
         </div>
 
         {/* Date Strip */}
@@ -146,7 +148,11 @@ const HomePage = () => {
              displayGames
               // 1. THIS FILTER IS MANDATORY
               .filter(game => {
-                 if (subActiveTab === 'All') return true;
+                 if (subActiveTab === 'All') {
+                   if (showLiveOnly) return game.status === 'live';
+                   return true;
+                 }
+                 if (showLiveOnly) return game.league === subActiveTab && game.status === 'live';
                 return game.league === subActiveTab;
               })
               .map((game) => (
